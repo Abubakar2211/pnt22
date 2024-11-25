@@ -33,15 +33,15 @@ include 'db.php';
                 </div>
                 <div class="mb-3 col-md-4 ">
                     <label for="contact" class="form-label">Contact Number</label>
-                    <input type="Number" class="form-control" id="contact" placeholder="Enter contact" name="contact">
+                    <input type="text" class="form-control" id="contact" placeholder="Enter contact" name="contact">
                 </div>
                 <div class="mb-3 col-md-4 ">
                     <label for="cellPhone" class="form-label">Cell Phone</label>
-                    <input type="Number" class="form-control" id="cellPhone" placeholder="Enter Cell Phone" name="cellPhone">
+                    <input type="text" class="form-control" id="cellPhone" placeholder="Enter Cell Phone" name="cellPhone">
                 </div>
                 <div class="mb-3 col-md-4 ">
                     <label for="cellNumber" class="form-label">Cell Number</label>
-                    <input type="Number" class="form-control" id="cellNumber" placeholder="Enter Cell Number" name="cellNumber">
+                    <input type="text" class="form-control" id="cellNumber" placeholder="Enter Cell Number" name="cellNumber">
                 </div>
                 <div class="mb-3 col-md-4 ">
                     <label for="joining" class="form-label">Joining</label>
@@ -163,7 +163,6 @@ include 'db.php';
 
 
         $(document).on("click", ".delete-btn", function() {
-            if (confirm("Do you really want to delete this record")) {
                 var clientId = $(this).data('id');
                 var element = this;
                 $.ajax({
@@ -182,7 +181,6 @@ include 'db.php';
                         }
                     }
                 })
-            }
         });
         $(document).on("click", ".edit-btn", function() {
             var clientId = $(this).data("eid");

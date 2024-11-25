@@ -123,7 +123,6 @@ include 'db.php';
 
         // Delete, Edit, and Save functionality
         $(document).on("click", ".delete-btn", function() {
-            if (confirm("Do you really want to delete this record")) {
                 var statusId = $(this).data('id');
                 var element = this;
                 $.ajax({
@@ -142,7 +141,6 @@ include 'db.php';
                         }
                     }
                 })
-            }
         });
 
         $(document).on("click", ".edit-btn", function() {

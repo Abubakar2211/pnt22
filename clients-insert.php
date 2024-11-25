@@ -1,5 +1,5 @@
 <?php
-include 'db.php'; 
+include 'db.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = mysqli_real_escape_string($con, $_POST['name']);
@@ -12,13 +12,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $clientStatus = mysqli_real_escape_string($con, $_POST['clientStatus']);
     $clientBoardcast = mysqli_real_escape_string($con, $_POST['clientBoardcast']);
 
-    $query = "INSERT INTO clients (name, email, contact, cellPhone, cellNumber, joining, companyName, clientStatus, clientBoardcast)
+    $emailCheck = "SELECT * FROM clients WHERE email = '$email'";
+    $result = mysqli_query($con, $emailCheck);
+
+    if (mysqli_num_rows($result) > 0) {
+        echo "This email is already registered.";
+    } else {
+
+        $query = "INSERT INTO clients (name, email, contact, cellPhone, cellNumber, joining, companyName, clientStatus, clientBoardcast)
               VALUES ('$name', '$email', '$contact', '$cellPhone', '$cellNumber', '$joining', '$companyName', '$clientStatus', '$clientBoardcast')";
 
-    if (mysqli_query($con, $query)) {
-        echo "Client added successfully.";
-    } else {
-        echo "Error: " . mysqli_error($con); // Log or display error for debugging
+        if (mysqli_query($con, $query)) {
+            echo "Client added successfully.";
+        } else {
+            echo "Error: " . mysqli_error($con); // Log or display error for debugging
+        }
     }
 }
-?>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2024 at 07:03 AM
+-- Generation Time: Nov 25, 2024 at 10:28 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -119,7 +119,8 @@ CREATE TABLE `city` (
 
 INSERT INTO `city` (`id`, `city`, `country_id`) VALUES
 (3, 'Karachissss', 2),
-(5, 'Karachi', 7);
+(5, 'Karachi', 8),
+(6, 'mumbai', 7);
 
 -- --------------------------------------------------------
 
@@ -129,16 +130,16 @@ INSERT INTO `city` (`id`, `city`, `country_id`) VALUES
 
 CREATE TABLE `clients` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `email` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `contact` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `contact` varchar(255) NOT NULL,
   `cellPhone` varchar(255) NOT NULL,
   `cellNumber` varchar(255) NOT NULL,
   `joining` varchar(255) NOT NULL,
   `companyName` varchar(255) NOT NULL,
   `clientStatus` varchar(255) NOT NULL,
   `clientBoardcast` varchar(255) NOT NULL,
-  `date_time` datetime NOT NULL DEFAULT current_timestamp()
+  `date_time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -146,7 +147,8 @@ CREATE TABLE `clients` (
 --
 
 INSERT INTO `clients` (`id`, `name`, `email`, `contact`, `cellPhone`, `cellNumber`, `joining`, `companyName`, `clientStatus`, `clientBoardcast`, `date_time`) VALUES
-(0, 'Cheryl Lin', 'johnstondouglas@gmail.com', '529-907-6129x70422', '+1-485-032-6738x1196', '(698)797-8852x156', '12/07/2021', 'Lane, Butler and Elliott', 'Active', 'Yes', '2024-11-24 11:34:07');
+(1, 'Abubakar Baig', 'abubakar192005@gmail.com', '03122082355', '000', '000', '2005-12-01', 'OG Technologies', 'active', 'active', '0000-00-00 00:00:00'),
+(2, 'Abubakar Baig', 'abubakar192005@gmail.com', '03122082355', '03122082355', 'aa', '2024-11-26', 'OG Technologies', 'active', 'active', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -181,7 +183,8 @@ CREATE TABLE `contacts` (
 --
 
 INSERT INTO `contacts` (`id`, `type`, `sub_type`, `first_name`, `last_name`, `designation`, `email_id`, `cell_number`, `phone_number`, `company_name`, `category`, `sub_category`, `website`, `country`, `city`, `D_O_B`, `religion`, `facebook`, `status`) VALUES
-(1, '3', '6', 'Abubakar', 'Baig', '', 'abubakar192005@gmail.com', '', '03122082355', '', '', '', '', '', '', '0000-00-00', '', '', 'Active');
+(1, '3', '6', 'Abubakar', 'Baig', '', 'abubakar192005@gmail.com', '', '03122082355', '', '', '', '', '', '', '0000-00-00', '', '', 'Active'),
+(2, '3', '6', 'hammad', '', '', 'hammad@gmail.com', '', '', '', '', '', '', '', '', '0000-00-00', '', '', 'Active');
 
 -- --------------------------------------------------------
 
@@ -220,10 +223,8 @@ CREATE TABLE `country` (
 --
 
 INSERT INTO `country` (`id`, `country`) VALUES
-(1, 'Pakistan'),
-(2, 'Pakistan'),
-(3, 'Pakistan'),
-(7, 'india');
+(7, 'india'),
+(8, 'Pakistan');
 
 -- --------------------------------------------------------
 
@@ -267,9 +268,10 @@ CREATE TABLE `religion` (
 --
 
 INSERT INTO `religion` (`id`, `religion`) VALUES
-(2, 'aaa'),
-(3, 'aaa'),
-(4, 'islam');
+(6, 'Islam'),
+(7, 'Sikhism'),
+(8, 'Confucianism'),
+(9, 'Hinduism');
 
 -- --------------------------------------------------------
 
@@ -288,7 +290,9 @@ CREATE TABLE `sub_category` (
 --
 
 INSERT INTO `sub_category` (`id`, `sub_category`, `category_id`) VALUES
-(2, 'Software engineer', 2);
+(2, 'Software engineer', 2),
+(3, 'aa', 2),
+(4, 'aa', 2);
 
 -- --------------------------------------------------------
 
@@ -307,10 +311,11 @@ CREATE TABLE `sub_types` (
 --
 
 INSERT INTO `sub_types` (`id`, `sub_type`, `type_id`) VALUES
-(3, 'Mobile Phones Supplier', 4),
-(4, 'Computer Hardware Supplier', 4),
-(5, 'Home Appliances Supplier', 4),
-(6, 'imran', 3);
+(6, 'imran', 3),
+(10, 'Mobile Supplier', 27),
+(11, 'IT Supplier', 27),
+(12, 'Dream Team 5', 3),
+(13, 'Five for Fun', 3);
 
 -- --------------------------------------------------------
 
@@ -325,7 +330,7 @@ CREATE TABLE `suppliers` (
   `contact` varchar(255) NOT NULL,
   `category` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `date_time` datetime DEFAULT current_timestamp()
+  `date_time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -333,7 +338,7 @@ CREATE TABLE `suppliers` (
 --
 
 INSERT INTO `suppliers` (`id`, `name`, `email`, `contact`, `category`, `password`, `date_time`) VALUES
-(0, 'Abubakar Baig', 'abubakar192005@gmail.com', '03122082355', '1', '202cb962ac59075b964b07152d234b70', '2024-11-07 01:40:10');
+(1, 'Abubakar Baig', 'abubakar192005@gmail.com', '03122082355', '1', '3691308f2a4c2f6983f2880d32e29c84', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -345,11 +350,11 @@ CREATE TABLE `teams` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `contact` varchar(50) NOT NULL,
+  `contact` varchar(255) NOT NULL,
   `designation` varchar(255) NOT NULL,
   `category` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `date_time` datetime NOT NULL DEFAULT current_timestamp()
+  `date_time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -357,8 +362,7 @@ CREATE TABLE `teams` (
 --
 
 INSERT INTO `teams` (`id`, `name`, `email`, `contact`, `designation`, `category`, `password`, `date_time`) VALUES
-(2, 'Abubakar Baig', 'abubakar192005@gmail.com', '03122082355', 'sdfdsf', '1', '803c1f47a32d8a17adeeb578391d85fb', '2024-10-30 23:25:24'),
-(5, 'hasan', 'hasan@gmail.com', '03122082355', 'hasan baig', '2', 'd9b1d7db4cd6e70935368a1efb10e377', '2024-10-30 23:57:31');
+(1, 'Abubakar Baig', 'abubakar192005@gmail.com', '03122082355', 'aa', '1', '4124bc0a9335c27f086f24ba207a4912', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -377,8 +381,8 @@ CREATE TABLE `types` (
 
 INSERT INTO `types` (`id`, `type`) VALUES
 (3, 'Team'),
-(4, 'Supplier'),
-(5, 'Contact');
+(27, 'Supplier'),
+(28, 'Contact');
 
 --
 -- Indexes for dumped tables
@@ -484,55 +488,73 @@ ALTER TABLE `add_contacts`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `city`
 --
 ALTER TABLE `city`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `clients`
+--
+ALTER TABLE `clients`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `contacts_status`
 --
 ALTER TABLE `contacts_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `country`
 --
 ALTER TABLE `country`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `religion`
 --
 ALTER TABLE `religion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `sub_category`
 --
 ALTER TABLE `sub_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `sub_types`
 --
 ALTER TABLE `sub_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `suppliers`
+--
+ALTER TABLE `suppliers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `teams`
+--
+ALTER TABLE `teams`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `types`
 --
 ALTER TABLE `types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- Constraints for dumped tables

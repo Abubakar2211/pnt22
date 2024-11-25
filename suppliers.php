@@ -133,7 +133,6 @@ include 'db.php'; // Include your database connection file
         });
 
         $(document).on("click", ".delete-btn", function() {
-            if (confirm("Do you really want to delete this record")) {
                 var supplierId = $(this).data('id');
                 var element = this;
                 $.ajax({
@@ -152,7 +151,6 @@ include 'db.php'; // Include your database connection file
                         }
                     }
                 })
-            }
         });
         $(document).on("click", ".edit-btn", function() {
             var supplierId = $(this).data("eid");
