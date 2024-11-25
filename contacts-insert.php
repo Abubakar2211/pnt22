@@ -28,29 +28,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if status exists and insert if not
     $statusCheckQuery = "SELECT * FROM contacts_status WHERE status = '$status'";
     $statusCheckResult = mysqli_query($con, $statusCheckQuery);
-    
+
     if (!$statusCheckResult || mysqli_num_rows($statusCheckResult) == 0) {
         $insertStatusQuery = "INSERT INTO contacts_status (status) VALUES ('$status')";
         if (!mysqli_query($con, $insertStatusQuery)) {
             die('Error adding status: ' . mysqli_error($con));
         }
     }
-    
 
-    $query = "INSERT INTO contacts (
-        type, sub_type, first_name, last_name, designation, email_id, cell_number, phone_number,
-        company_name, category, sub_category, website, country, city, D_O_B, religion, facebook, status
-    ) VALUES (
-        '$types', '$sub_types', '$first_name', '$last_name', '$designation', '$email_id', '$cell_number',
-        '$phone_number', '$company_name', '$category', '$sub_category', '$website', '$country_field',
-        '$city', '$D_O_B', '$religion', '$facebook', '$status'
-    )";
+    $checkEmailQuery = "SELECT * FROM contacts WHERE email_id = '$email_id'";
+    $result = mysqli_query($con, $checkEmailQuery);
 
- 
-    if (mysqli_query($con, $query)) {
-        echo "Contact added successfully.";
+    if (mysqli_num_rows($result) > 0) {
+        echo "This email is already registered.";
     } else {
-        echo "Error: " . mysqli_error($con);
+        $query = "INSERT INTO contacts (
+            type, sub_type, first_name, last_name, designation, email_id, cell_number, phone_number,
+            company_name, category, sub_category, website, country, city, D_O_B, religion, facebook, status
+        ) VALUES (
+            '$types', '$sub_types', '$first_name', '$last_name', '$designation', '$email_id', '$cell_number',
+            '$phone_number', '$company_name', '$category', '$sub_category', '$website', '$country_field',
+            '$city', '$D_O_B', '$religion', '$facebook', '$status'
+        )";
+
+        if (mysqli_query($con, $query)) {
+            echo "Contact added successfully.";
+        } else {
+            echo "Error: " . mysqli_error($con);
+        }
     }
 }
 ?>
