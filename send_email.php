@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Attachments handling (if needed)
     $attachment = null;
     if (isset($_FILES['attachment']) && $_FILES['attachment']['error'] == UPLOAD_ERR_OK) {
-        $tmp_name = $_FILES['attachment']['tmp_name'];Q
+        $tmp_name = $_FILES['attachment']['tmp_name'];
         $attachment = file_get_contents($tmp_name);
     }
 
